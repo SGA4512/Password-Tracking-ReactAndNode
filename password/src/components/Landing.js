@@ -24,11 +24,26 @@ class Landing extends React.Component{
           .catch(errors => { console.log(`Could not fetch previous password entries: ${errors}`);})
       }
 
+   onDeletePassword = (password) =>{
+
+        const request = new Request('/password/delete/' + password.id, {
+            crossDomain:true,
+            method: 'DELETE',  
+            redirect: 'follow',
+            headers: new Headers({'Content-Type': 'application/json'}),
+            credentials: 'same-origin'
+          });
+    
+          fetch(request)
+            .then(response => { return response.json(); })
+            .then(data => { this.setState({passwords: data}) ; console.log(data) })
+            .catch(errors => { console.log(`Could not fetch previous password entries: ${errors}`);})
+    }
 
     render(){
         return (
             <div className="container landing">
-              <div className="col-md-12">
+              <div className="col-md-offset-3 col-md-6">
               <Route render={({ history}) => (
             <button
               type='button'
@@ -39,8 +54,8 @@ class Landing extends React.Component{
             </button>
               )} />
               </div>
-              <div className="col-md-6" style={{ marginTop: '20px' }}>
-                <PasswordList passwords={ this.state.passwords } onSelectPassword = { this.selectPassword } />
+              <div className="col-md-offset-3 col-md-6" style={{ marginTop: '20px' }}>
+                <PasswordList passwords={ this.state.passwords } onSelectPassword = { this.selectPassword } onDeletePassword={this.onDeletePassword} />
               </div>
               </div>
         )

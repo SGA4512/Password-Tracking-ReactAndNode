@@ -54,7 +54,7 @@ class Edit extends React.Component{
         return(
           <div className="container">
             <div className="col-md-offset-3 col-md-6">
-              <h2>Add new record</h2>
+              <h2>Edit Password</h2>
           <form onSubmit={this.onFormSubmit}>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Website address</label>
@@ -70,7 +70,7 @@ class Edit extends React.Component{
                     onChange = {e => this.setState({password: e.target.value})}
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Save</button>
                 <Route render={({ history}) => (
             <button
               type='button'
